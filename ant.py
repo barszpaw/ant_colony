@@ -14,7 +14,6 @@ class Ant:
         self.return_to_colony = False
         self.name = name
 
-
     def move(self):
         if self.return_to_colony:
             pass
