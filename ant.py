@@ -10,7 +10,7 @@ class Ant:
         self.position = point(ant_colony_pos['x'], ant_colony_pos['y'])
         self.world = world
         self.__update_path(ant_colony_pos['x'], ant_colony_pos['y'])
-        self.world.world_matrix[ant_colony_pos['y']][ant_colony_pos['x']].visit()
+        # self.world.world_matrix[ant_colony_pos['y']][ant_colony_pos['x']].visit()
         self.return_to_colony = False
         self.name = name
 
@@ -26,10 +26,11 @@ class Ant:
             self.position = point(x_pos, y_pos)
             if self.position.x == self.world.food_pos.x and self.position.y == self.world.food_pos.y:
                 self.return_to_colony = True
-            self.world.world_matrix[y_pos][x_pos].visit()
+
             self.__update_path(x_pos, y_pos)
 
     def __update_path(self, x_pos=0, y_pos=0):
+        self.world.world_matrix[y_pos][x_pos].visit()
         for p in self.path:
             if p.x == x_pos and p.y == y_pos:
                 p.visit()
@@ -37,4 +38,5 @@ class Ant:
         p = point(x_pos, y_pos)
         p.visit()
         self.path.append(p)
+
         return self

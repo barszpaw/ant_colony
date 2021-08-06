@@ -33,7 +33,7 @@ def print_swiat(w, ants):
     #         board_rows[pos.y][pos.x] = znak
 
     board_rows[w.food_pos.y][w.food_pos.x] = 'F'
-    board_rows[w.ant_colony_pos.y][w.ant_colony_pos.y] = 'K'
+    board_rows[w.ant_colony_pos.y][w.ant_colony_pos.x] = 'K'
     # display current state of world
     for y, rows in enumerate(board_rows):
         # print("{}: ".format(y), end="")
@@ -43,15 +43,22 @@ def print_swiat(w, ants):
 
 
 swiat = World()
-#ants = [Ant(swiat,k) for k in range(10)]
-ants = [Ant(swiat, "1")]
-for i in range(100):
+ants = [Ant(swiat,k) for k in range(100)]
+#ants = [Ant(swiat, "1")]
+iteration_list=range(100)
+for i in iteration_list:
     for a in ants:
         a.move()
     os.system('clear')
-    print("Iteracja: {} ".format(i), end="")
+    print("Ant pos: ", end="")
+    for p in a.path:
+        print("{}, {} ".format(p.x, p.y), end="\n")
+    print()
+    print("Iteracja: {} z {} ".format(i+1,len(iteration_list)), end="")
     print(" Food: {},{}".format(swiat.food_pos.x, swiat.food_pos.y), end="")
     print(" Ant colony: {},{}".format(swiat.ant_colony_pos.x, swiat.ant_colony_pos.y))
+
+
     print_swiat(swiat, ants)
     sleep(0.1)
 
